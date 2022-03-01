@@ -1,0 +1,49 @@
+body, main {
+  height: 100vh;
+}
+
+main {
+  animation: moving 10s ease alternate infinite;
+  background: linear-gradient(to right bottom, #374151, #111827, black);
+  background-size: 400% 400%;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+@keyframes moving {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.music_list {
+  height: 100%;
+  width: 50%;
+}
+
+.music_card {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 50%;
+  height: 80%;
+}
+
+.music_img {
+  width: 100%;
+}
+/*# sourceMappingURL=MusicPlayer.css.map */
