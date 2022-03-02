@@ -1,40 +1,138 @@
-body,main {
-    height: 100vh;
+@mixin displayes($display, $align, $justify, $direction) {
+  display: $display;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $direction;
 }
-main{
-    animation: moving 10s ease alternate infinite;
-    background: linear-gradient(to right bottom, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0));
-    background-size: 400% 400%;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+
+body,
+main {
+  height: 100vh;
+}
+main {
+  animation: moving 10s ease alternate infinite;
+  background: linear-gradient(
+    to right bottom,
+    rgb(55, 65, 81),
+    rgb(17, 24, 39),
+    rgb(0, 0, 0)
+  );
+  background-size: 400% 400%;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  animation-play-state: paused;
 }
 @keyframes moving {
-    0% {background-position: 0% 0%}
-    50% {background-position: 50% 50%;}
-    100% {background-position: 100% 100%;}
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.music_list {
+  height: 100%;
+  width: 50%;
 }
 
 
 
-.music_list{
-height: 100%;
-width: 50%;
-}
-.music_card{
-height: 100%;
-width: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
+
+
+
+
+
+
+
+
+
+
+
+
+.music_card {
+  height: 100%;
+  width: 50%;
+  @include displayes(flex, center, center, row);
 }
 
 .card {
-    width: 50%;
-    height: 80%;
-}
-.music_img {
+  width: 310px;
+  height: 550px;
+  border: none;
+  @include displayes(flex, center, flex-start, column);
+  .music_img {
     width: 100%;
+    animation: equalizer 0.3s ease infinite alternate;
+    animation-play-state: paused;
+    border-radius: 0.25rem;
+  }
+  .music_name {
+    text-align: center;
+    font-size: 1.6em;
+    margin-top: 1rem !important;
+    color: #001d3d;
+  }
+  .music_btns {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    i {
+      font-size: 1.4em;
+      cursor: pointer;
+      border-radius: 50%;
+      background-color: #ff7d00;
+      margin: 0 4px 0 4px;
+      padding: 0 5px;
+      color: #fff;
+      box-shadow: 3px 3px 4px #aaa;
+      transition: all .8s ease-out;
+      &:hover{
+          background-color: #001d3d;
+          box-shadow: none;
+      }
+    }
+  }
+  .music_range_wrapper {
+    width: 80%;
+    @include displayes(flex, center, space-evenly, column);
+    .music_time {
+      appearance: none;
+      background-color: #ff7d00;
+      width: 100%;
+      height: 3px;
+      margin-top: 30px;
+      border-radius: 10px;
+      cursor: pointer;
+      &::-webkit-slider-thumb {
+        appearance: none;
+        background-color: #f77f00;
+        width: 15px;
+        height: 15px;
+        border-radius: 25%;
+      }
+    }
+    .music_time_number {
+      font-size: 0.8em;
+      color: #001d3d;
+      margin-bottom: 0 !important;
+      margin-top: 10px;
+      align-self: flex-start;
+    }
+  }
+}
+
+@keyframes equalizer {
+  from {
+    box-shadow: none;
+  }
+  to {
+    box-shadow: 0 0 6px 6px orange;
+  }
 }
