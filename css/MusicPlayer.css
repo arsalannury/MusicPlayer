@@ -12,7 +12,6 @@ main {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  animation-play-state: paused;
 }
 
 @keyframes moving {
