@@ -10,7 +10,7 @@ main {
   height: 100vh;
 }
 main {
-  animation: moving 10s ease alternate infinite;
+  animation: moving 5s ease alternate infinite;
   background: linear-gradient(
     to right bottom,
     rgb(55, 65, 81),
@@ -38,18 +38,48 @@ main {
 }
 
 .music_list {
+  @include displayes(flex, center, center, column);
   height: 100%;
   width: 50%;
+  .music_ul_list {
+    @include displayes(flex, center, space-between, column);
+    width: 500px;
+    height: 550px;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    padding: 10px 0 30px 0;
+    margin: 0;
+    .music_item_list {
+      cursor: pointer;
+      list-style-type: none;
+      padding: 10px;
+      width: 100%;
+      @include displayes(flex, center, space-around, row);
+      img {
+        width: 50px;
+        border-radius: 50%;
+      }
+      .music_list_name {
+        font-size: 0.8em;
+        color: #777;
+      }
+      .music_list_time {
+        font-size: 0.8em;
+        color: #777;
+      }
+    }
+  }
+  .music_ul_list li:first-child {
+    width: 100%;
+    padding: 0;
+    box-shadow: none;
+    background-color: #fff;
+    @include displayes(flex, center, space-around, row);
+    .music_img_list {
+      width: 30px;
+    }
+  }
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -92,10 +122,10 @@ main {
       padding: 0 5px;
       color: #fff;
       box-shadow: 3px 3px 4px #aaa;
-      transition: all .8s ease-out;
-      &:hover{
-          background-color: #001d3d;
-          box-shadow: none;
+      transition: all 0.8s ease-out;
+      &:hover {
+        background-color: #001d3d;
+        box-shadow: none;
       }
     }
   }
