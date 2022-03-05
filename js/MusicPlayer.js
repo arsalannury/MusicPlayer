@@ -46,22 +46,41 @@ let audio = musicsList[currentMusic].music;
 musicCover.src = musicsList[currentMusic].cover;
 musicName.innerText = musicsList[currentMusic].name;
 
+const isMusicEnd = () => {
+  musicTimeRange.value = 0;
+  audio.currentTime = 0;
+  audio.play();
+};
+
 const changeMusic = () => {
   audio = musicsList[currentMusic].music;
   musicCover.src = musicsList[currentMusic].cover;
   musicName.innerText = musicsList[currentMusic].name;
+  musicCover.style.animationPlayState = "paused";
+  musicCover.style.animationName = "none";
+  musicTimeRange.value = 0;
+  audio.currentTime = 0;
+  audio.addEventListener("timeupdate", (e) => {
+    musicTimeRange.value = e.target.currentTime;
+    musicTimeRange.max = e.target.duration;
+    musicTime.innerText = Math.floor(e.target.currentTime);
+    if (audio.currentTime === audio.duration) {
+      isMusicEnd();
+    }
+  });
 };
 
-// audio.addEventListener("canplay", (e) => {
-//   musicTimeRange.max = e.target.duration;
-//   musicTimeRange.value = e.target.currentTime;
-//   console.log(22)
-// });
+audio.addEventListener("canplay", (e) => {
+  musicTimeRange.max = e.target.duration;
+});
 
 audio.addEventListener("timeupdate", (e) => {
   musicTimeRange.value = e.target.currentTime;
   musicTimeRange.max = e.target.duration;
   musicTime.innerText = Math.floor(e.target.currentTime);
+  if (audio.currentTime === audio.duration) {
+    isMusicEnd();
+  }
 });
 
 musicTimeRange.addEventListener("input", (e) => {
@@ -72,16 +91,26 @@ playBtn.addEventListener("click", (e) => {
   if (audio.paused) {
     audio.play();
     e.target.classList.replace("bi-play-fill", "bi-pause-fill");
+    musicCover.style.animationPlayState = "running";
+    musicCover.style.animationName = "equalizer";
   } else {
     audio.pause();
     e.target.classList.replace("bi-pause-fill", "bi-play-fill");
+    musicCover.style.animationPlayState = "paused";
+    musicCover.style.animationName = "none";
   }
 });
 
-nextBtn.addEventListener("click", (e) => {
-  if(audio.played) audio.pause();
+nextBtn.addEventListener("click", () => {
+  if (audio.played) audio.pause();
   playBtn.classList.replace("bi-pause-fill", "bi-play-fill");
-  currentMusic += 1;
+  currentMusic >= 4 ? (currentMusic = 0) : (currentMusic += 1);
   changeMusic();
-  musicTimeRange.value = audio.currentTime;
+});
+
+prevBtn.addEventListener("click", () => {
+  if (audio.played) audio.pause();
+  playBtn.classList.replace("bi-pause-fill", "bi-play-fill");
+  currentMusic <= 0 ? (currentMusic = 4) : (currentMusic -= 1);
+  changeMusic();
 });

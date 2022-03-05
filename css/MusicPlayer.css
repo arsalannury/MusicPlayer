@@ -110,7 +110,7 @@ main {
 
 .card .music_img {
   width: 100%;
-  animation: equalizer 0.3s ease infinite alternate;
+  animation: equalizer 0.7s ease infinite alternate;
   animation-play-state: paused;
   border-radius: 0.25rem;
 }

@@ -23,7 +23,6 @@ main {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  // animation-play-state: paused;
 }
 @keyframes moving {
   0% {
@@ -99,7 +98,7 @@ main {
   @include displayes(flex, center, flex-start, column);
   .music_img {
     width: 100%;
-    animation: equalizer 0.3s ease infinite alternate;
+    animation: equalizer 0.7s ease infinite alternate;
     animation-play-state: paused;
     border-radius: 0.25rem;
   }

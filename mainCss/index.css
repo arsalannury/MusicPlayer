@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-size: 16px;
     font-family: my-font;
+    user-select: none;
 }
 @font-face {
     font-family: my-font ;
