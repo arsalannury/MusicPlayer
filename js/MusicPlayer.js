@@ -6,6 +6,7 @@ const playBtn = document.querySelector("#play_btn");
 const pauseBtn = document.querySelector("#pause_btn");
 const nextBtn = document.querySelector("#next_btn");
 const prevBtn = document.querySelector("#prev_btn");
+const musicTimeAll = document.querySelector(".music_time_all");
 
 const musicsList = [
   {
@@ -42,6 +43,10 @@ const musicsList = [
 
 let currentMusic = 0;
 
+function fmtMSS(s) {
+  return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
+}
+
 let audio = musicsList[currentMusic].music;
 musicCover.src = musicsList[currentMusic].cover;
 musicName.innerText = musicsList[currentMusic].name;
@@ -64,6 +69,7 @@ const changeMusic = () => {
     musicTimeRange.value = e.target.currentTime;
     musicTimeRange.max = e.target.duration;
     musicTime.innerText = Math.floor(e.target.currentTime);
+    musicTimeAll.innerText = fmtMSS(Math.floor(audio.duration));
     if (audio.currentTime === audio.duration) {
       isMusicEnd();
     }
@@ -75,9 +81,16 @@ audio.addEventListener("canplay", (e) => {
 });
 
 audio.addEventListener("timeupdate", (e) => {
+  let time = fmtMSS(Math.floor(0));
+ 
+  
   musicTimeRange.value = e.target.currentTime;
   musicTimeRange.max = e.target.duration;
-  musicTime.innerText = Math.floor(e.target.currentTime);
+  musicTime.innerText = time;
+  setInterval(() => {
+    musicTime.innerText = time;
+  },1000)
+  musicTimeAll.innerText = fmtMSS(Math.floor(audio.duration));
   if (audio.currentTime === audio.duration) {
     isMusicEnd();
   }

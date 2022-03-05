@@ -171,12 +171,26 @@ main {
   border-radius: 25%;
 }
 
-.card .music_range_wrapper .music_time_number {
+.card .music_range_wrapper .timer_show {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+}
+
+.card .music_range_wrapper .timer_show .music_time_number {
   font-size: 0.8em;
   color: #001d3d;
   margin-bottom: 0 !important;
   margin-top: 10px;
-  align-self: flex-start;
+}
+
+.card .music_range_wrapper .timer_show .music_time_all {
+  font-size: 0.8em;
+  color: #001d3d;
+  margin-bottom: 0 !important;
+  margin-top: 10px;
 }
 
 @keyframes equalizer {

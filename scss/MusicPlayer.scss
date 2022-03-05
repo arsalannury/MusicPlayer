@@ -147,13 +147,25 @@ main {
         border-radius: 25%;
       }
     }
-    .music_time_number {
-      font-size: 0.8em;
-      color: #001d3d;
-      margin-bottom: 0 !important;
-      margin-top: 10px;
-      align-self: flex-start;
+    .timer_show {
+      @include displayes(flex,center,space-between,row);
+      width: 100%;
+      .music_time_number {
+        font-size: 0.8em;
+        color: #001d3d;
+        margin-bottom: 0 !important;
+        margin-top: 10px;
+        // align-self: flex-start;
+      }
+      .music_time_all {
+        font-size: 0.8em;
+        color: #001d3d;
+        margin-bottom: 0 !important;
+        margin-top: 10px;
+        // align-self: flex-start;
+      }
     }
+   
   }
 }
 
