@@ -95,6 +95,7 @@ main {
   width: 310px;
   height: 550px;
   border: none;
+  background-color: #fff;
   @include displayes(flex, center, flex-start, column);
   .music_img {
     width: 100%;
@@ -111,7 +112,7 @@ main {
   .music_btns {
     width: 100%;
     text-align: center;
-    margin-top: 30px;
+    margin-top: 20px;
     i {
       font-size: 1.4em;
       cursor: pointer;
@@ -155,17 +156,27 @@ main {
         color: #001d3d;
         margin-bottom: 0 !important;
         margin-top: 10px;
-        // align-self: flex-start;
       }
       .music_time_all {
         font-size: 0.8em;
         color: #001d3d;
         margin-bottom: 0 !important;
         margin-top: 10px;
-        // align-self: flex-start;
       }
     }
-   
+  }
+  .music_options {
+   width: 100%;
+   @include displayes(flex,center,space-evenly,row);
+   i {
+     font-size: 23px;
+     color: #001d3d;
+     cursor: pointer;
+     transition: all .5s ease;
+   }
+   .active_repeat_icon {
+     color: #f77f00;
+   }
   }
 }
 

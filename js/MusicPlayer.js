@@ -7,6 +7,9 @@ const pauseBtn = document.querySelector("#pause_btn");
 const nextBtn = document.querySelector("#next_btn");
 const prevBtn = document.querySelector("#prev_btn");
 const musicTimeAll = document.querySelector(".music_time_all");
+const musicRepeat = document.querySelector(".music_repeat_icon");
+const musicVolumeUp = document.getElementById("music_volumeup_icon");
+const musicMute = document.getElementById("music_mute_icon");
 
 const musicsList = [
   {
@@ -43,20 +46,56 @@ const musicsList = [
 
 let currentMusic = 0;
 
+// this function return cuurent time music and you can show it in DOM
 function fmtMSS(s) {
   return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
 }
 
+// config music object
 let audio = musicsList[currentMusic].music;
 musicCover.src = musicsList[currentMusic].cover;
 musicName.innerText = musicsList[currentMusic].name;
 
+//  this function change everytime which click on repeat mode
+let repeatAfterEnd = () => {
+  repeatIconUnActive();
+};
+
+
+// with this we can control cartmusic when music is end
 const isMusicEnd = () => {
   musicTimeRange.value = 0;
   audio.currentTime = 0;
   audio.play();
 };
 
+
+const repeatIconUnActive = () => {
+  if (audio.currentTime === audio.duration) {
+    musicTimeRange.value = 0;
+    audio.currentTime = 0;
+    musicCover.style.animationPlayState = "paused";
+    musicCover.style.animationName = "none";
+    playBtn.classList.replace("bi-play-fill", "bi-pause-fill");
+    currentMusic >= 4 ? (currentMusic = 0) : (currentMusic += 1);
+    audio = musicsList[currentMusic].music;
+    musicCover.src = musicsList[currentMusic].cover;
+    musicName.innerText = musicsList[currentMusic].name;
+    audio.play();
+    audio.addEventListener("timeupdate", (e) => {
+      musicTimeRange.value = e.target.currentTime;
+      musicTimeRange.max = e.target.duration;
+      musicTimeAll.innerText = fmtMSS(Math.floor(audio.duration));
+      setInterval(() => {
+        musicTime.innerText = fmtMSS(Math.floor(audio.currentTime));
+      }, 1000);
+      repeatAfterEnd();
+    });
+  }
+};
+
+
+// handler next and prev btn
 const changeMusic = () => {
   audio = musicsList[currentMusic].music;
   musicCover.src = musicsList[currentMusic].cover;
@@ -68,37 +107,38 @@ const changeMusic = () => {
   audio.addEventListener("timeupdate", (e) => {
     musicTimeRange.value = e.target.currentTime;
     musicTimeRange.max = e.target.duration;
-    musicTime.innerText = Math.floor(e.target.currentTime);
     musicTimeAll.innerText = fmtMSS(Math.floor(audio.duration));
-    if (audio.currentTime === audio.duration) {
-      isMusicEnd();
-    }
+    setInterval(() => {
+      musicTime.innerText = fmtMSS(Math.floor(audio.currentTime));
+    }, 1000);
+    repeatAfterEnd();
   });
 };
 
+//  audio events can play amd time update
+
 audio.addEventListener("canplay", (e) => {
   musicTimeRange.max = e.target.duration;
+  musicTimeAll.innerText = fmtMSS(Math.floor(audio.duration));
 });
 
 audio.addEventListener("timeupdate", (e) => {
-  let time = fmtMSS(Math.floor(0));
- 
-  
   musicTimeRange.value = e.target.currentTime;
   musicTimeRange.max = e.target.duration;
-  musicTime.innerText = time;
-  setInterval(() => {
-    musicTime.innerText = time;
-  },1000)
   musicTimeAll.innerText = fmtMSS(Math.floor(audio.duration));
-  if (audio.currentTime === audio.duration) {
-    isMusicEnd();
-  }
+  setInterval(() => {
+    musicTime.innerText = fmtMSS(Math.floor(audio.currentTime));
+  }, 1000);
+  repeatAfterEnd();
 });
+
+//  setting music range input
 
 musicTimeRange.addEventListener("input", (e) => {
   audio.currentTime = e.target.value;
 });
+
+//  buttons events handler
 
 playBtn.addEventListener("click", (e) => {
   if (audio.paused) {
@@ -126,4 +166,22 @@ prevBtn.addEventListener("click", () => {
   playBtn.classList.replace("bi-pause-fill", "bi-play-fill");
   currentMusic <= 0 ? (currentMusic = 4) : (currentMusic -= 1);
   changeMusic();
+});
+
+// repeat event handler
+
+musicRepeat.addEventListener("click", (e) => {
+  if (e.target.classList.contains("music_repeat_icon")) {
+    e.target.classList.replace("music_repeat_icon", "active_repeat_icon");
+    repeatAfterEnd = () => {
+      if (audio.currentTime === audio.duration) {
+        isMusicEnd();
+      }
+    };
+  } else {
+    e.target.classList.replace("active_repeat_icon", "music_repeat_icon");
+    repeatAfterEnd = () => {
+      repeatIconUnActive();
+    };
+  }
 });

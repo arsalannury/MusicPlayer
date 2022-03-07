@@ -102,6 +102,7 @@ main {
   width: 310px;
   height: 550px;
   border: none;
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -125,7 +126,7 @@ main {
 .card .music_btns {
   width: 100%;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .card .music_btns i {
@@ -191,6 +192,25 @@ main {
   color: #001d3d;
   margin-bottom: 0 !important;
   margin-top: 10px;
+}
+
+.card .music_options {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.card .music_options i {
+  font-size: 23px;
+  color: #001d3d;
+  cursor: pointer;
+  transition: all .5s ease;
+}
+
+.card .music_options .active_repeat_icon {
+  color: #f77f00;
 }
 
 @keyframes equalizer {
