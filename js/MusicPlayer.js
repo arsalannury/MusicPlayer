@@ -185,3 +185,17 @@ musicRepeat.addEventListener("click", (e) => {
     };
   }
 });
+
+
+// mute button handler
+
+
+musicVolumeUp.addEventListener('click', (e) => {
+  if(!audio.muted) {
+    e.target.classList.replace('bi-volume-up-fill','bi-volume-mute-fill');
+    audio.muted = true
+  }else{
+    e.target.classList.replace('bi-volume-mute-fill','bi-volume-up-fill');
+    audio.muted = false
+  }
+})

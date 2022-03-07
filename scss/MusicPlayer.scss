@@ -96,6 +96,7 @@ main {
   height: 550px;
   border: none;
   background-color: #fff;
+  border-radius: 0.25rem;
   @include displayes(flex, center, flex-start, column);
   .music_img {
     width: 100%;
