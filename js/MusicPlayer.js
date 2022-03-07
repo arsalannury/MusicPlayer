@@ -10,36 +10,54 @@ const musicTimeAll = document.querySelector(".music_time_all");
 const musicRepeat = document.querySelector(".music_repeat_icon");
 const musicVolumeUp = document.getElementById("music_volumeup_icon");
 const musicMute = document.getElementById("music_mute_icon");
+const musicListCoverOne = document.querySelector(".music_list_cover1");
+const musicListCoverTwo = document.querySelector(".music_list_cover2");
+const musicListCoverThree = document.querySelector(".music_list_cover3");
+const musicListCoverFour = document.querySelector(".music_list_cover4");
+const musicListCoverFive = document.querySelector(".music_list_cover5");
+const musicListNameOne = document.querySelector(".music_list_name1");
+const musicListNameTwo = document.querySelector(".music_list_name2");
+const musicListNameThree = document.querySelector(".music_list_name3");
+const musicListNameFour = document.querySelector(".music_list_name4");
+const musicListNameFive = document.querySelector(".music_list_name5");
+const musicListTimeOne = document.querySelector(".music_list_time1");
+const musicListTimeTwo = document.querySelector(".music_list_time2");
+const musicListTimeThree = document.querySelector(".music_list_time3");
+const musicListTimeFour = document.querySelector(".music_list_time4");
+const musicListTimeFive = document.querySelector(".music_list_time5");
+const t = new Audio("../musics/Shayea-YeMoghehaei2.mp3")
+const musicItemList = document.querySelectorAll('.music_item_list .music_list_name')
+
 
 const musicsList = [
   {
     music: new Audio("../musics/Shayea-Asabani.mp3"),
     name: "Shayea - Asabani",
-    time: "",
+    time: new Audio("../musics/Shayea-Asabani.mp3").duration,
     cover: "../pictures/asabani.jpg",
   },
   {
     music: new Audio("../musics/Shayea-YeMoghehaei2.mp3"),
     name: "Shayea-Ye Moghehaei 2",
-    time: "",
+    time: fmtMSS(Math.floor(t.duration)),
     cover: "../pictures/yemoghe.jpg",
   },
   {
     music: new Audio("../musics/Shayea-Daram.mp3"),
     name: "Shayea-Daram",
-    time: "",
+    time: new Audio("../musics/Shayea-Daram.mp3").duration,
     cover: "../pictures/daram.jpg",
   },
   {
     music: new Audio("../musics/Shayea-Sabr.mp3"),
     name: "Shayea-Sabr",
-    time: "",
+    time: new Audio("../musics/Shayea-Sabr.mp3").duration,
     cover: "../pictures/Sabr.jpg",
   },
   {
     music: new Audio("../musics/Shayea-Sabr2.mp3"),
     name: "Shayea-Sabr 2",
-    time: "",
+    time: new Audio("../musics/Shayea-Sabr2.mp3").duration,
     cover: "../pictures/sabr2.jpg",
   },
 ];
@@ -61,14 +79,12 @@ let repeatAfterEnd = () => {
   repeatIconUnActive();
 };
 
-
 // with this we can control cartmusic when music is end
 const isMusicEnd = () => {
   musicTimeRange.value = 0;
   audio.currentTime = 0;
   audio.play();
 };
-
 
 const repeatIconUnActive = () => {
   if (audio.currentTime === audio.duration) {
@@ -93,7 +109,6 @@ const repeatIconUnActive = () => {
     });
   }
 };
-
 
 // handler next and prev btn
 const changeMusic = () => {
@@ -186,16 +201,39 @@ musicRepeat.addEventListener("click", (e) => {
   }
 });
 
-
 // mute button handler
 
-
-musicVolumeUp.addEventListener('click', (e) => {
-  if(!audio.muted) {
-    e.target.classList.replace('bi-volume-up-fill','bi-volume-mute-fill');
-    audio.muted = true
-  }else{
-    e.target.classList.replace('bi-volume-mute-fill','bi-volume-up-fill');
-    audio.muted = false
+musicVolumeUp.addEventListener("click", (e) => {
+  if (!audio.muted) {
+    e.target.classList.replace("bi-volume-up-fill", "bi-volume-mute-fill");
+    audio.muted = true;
+  } else {
+    e.target.classList.replace("bi-volume-mute-fill", "bi-volume-up-fill");
+    audio.muted = false;
   }
+});
+
+// ___________________________________________________________________________
+
+musicListCoverOne.src = musicsList[0].cover;
+musicListCoverTwo.src = musicsList[1].cover;
+musicListCoverThree.src = musicsList[2].cover;
+musicListCoverFour.src = musicsList[3].cover;
+musicListCoverFive.src = musicsList[4].cover;
+
+// musicListNameOne.innerText = musicsList[0].name;
+// musicListNameTwo.innerText = musicsList[1].name;
+// musicListNameThree.innerText = musicsList[2].name;
+// musicListNameFour.innerText = musicsList[3].name;
+// musicListNameFive.innerText = musicsList[4].name;
+
+musicItemList.forEach((element,index) => {
+  element[index].innerText = musicsList[index].name;
 })
+
+
+musicListTimeOne.innerText = musicsList[0].time
+musicListTimeTwo.innerText = musicsList[1].time
+musicListTimeThree.innerText = musicsList[2].time
+musicListTimeFour.innerText = musicsList[3].time
+musicListTimeFive.innerText = musicsList[4].time
