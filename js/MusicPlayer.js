@@ -10,54 +10,42 @@ const musicTimeAll = document.querySelector(".music_time_all");
 const musicRepeat = document.querySelector(".music_repeat_icon");
 const musicVolumeUp = document.getElementById("music_volumeup_icon");
 const musicMute = document.getElementById("music_mute_icon");
-const musicListCoverOne = document.querySelector(".music_list_cover1");
-const musicListCoverTwo = document.querySelector(".music_list_cover2");
-const musicListCoverThree = document.querySelector(".music_list_cover3");
-const musicListCoverFour = document.querySelector(".music_list_cover4");
-const musicListCoverFive = document.querySelector(".music_list_cover5");
-const musicListNameOne = document.querySelector(".music_list_name1");
-const musicListNameTwo = document.querySelector(".music_list_name2");
-const musicListNameThree = document.querySelector(".music_list_name3");
-const musicListNameFour = document.querySelector(".music_list_name4");
-const musicListNameFive = document.querySelector(".music_list_name5");
-const musicListTimeOne = document.querySelector(".music_list_time1");
-const musicListTimeTwo = document.querySelector(".music_list_time2");
-const musicListTimeThree = document.querySelector(".music_list_time3");
-const musicListTimeFour = document.querySelector(".music_list_time4");
-const musicListTimeFive = document.querySelector(".music_list_time5");
-const t = new Audio("../musics/Shayea-YeMoghehaei2.mp3")
-const musicItemList = document.querySelectorAll('.music_item_list .music_list_name')
+const allElementMusicList = document.querySelector(".music_ul_list");
 
+const musicItemListNames = document.querySelectorAll(
+  ".music_item_list .music_list_name"
+);
+const musicItemListCovers = document.querySelectorAll(
+  ".music_item_list .music_list_cover"
+);
+const musicItemListTimes = document.querySelectorAll(
+  ".music_item_list .music_list_time"
+);
 
 const musicsList = [
   {
     music: new Audio("../musics/Shayea-Asabani.mp3"),
     name: "Shayea - Asabani",
-    time: new Audio("../musics/Shayea-Asabani.mp3").duration,
     cover: "../pictures/asabani.jpg",
   },
   {
     music: new Audio("../musics/Shayea-YeMoghehaei2.mp3"),
     name: "Shayea-Ye Moghehaei 2",
-    time: fmtMSS(Math.floor(t.duration)),
     cover: "../pictures/yemoghe.jpg",
   },
   {
     music: new Audio("../musics/Shayea-Daram.mp3"),
     name: "Shayea-Daram",
-    time: new Audio("../musics/Shayea-Daram.mp3").duration,
     cover: "../pictures/daram.jpg",
   },
   {
     music: new Audio("../musics/Shayea-Sabr.mp3"),
     name: "Shayea-Sabr",
-    time: new Audio("../musics/Shayea-Sabr.mp3").duration,
     cover: "../pictures/Sabr.jpg",
   },
   {
     music: new Audio("../musics/Shayea-Sabr2.mp3"),
     name: "Shayea-Sabr 2",
-    time: new Audio("../musics/Shayea-Sabr2.mp3").duration,
     cover: "../pictures/sabr2.jpg",
   },
 ];
@@ -83,20 +71,20 @@ let repeatAfterEnd = () => {
 const isMusicEnd = () => {
   musicTimeRange.value = 0;
   audio.currentTime = 0;
+  musicCover.style.animationPlayState = "running";
   audio.play();
 };
 
-const repeatIconUnActive = () => {
+// if repeat was un active music change
+function repeatIconUnActive () {
   if (audio.currentTime === audio.duration) {
-    musicTimeRange.value = 0;
-    audio.currentTime = 0;
-    musicCover.style.animationPlayState = "paused";
-    musicCover.style.animationName = "none";
     playBtn.classList.replace("bi-play-fill", "bi-pause-fill");
     currentMusic >= 4 ? (currentMusic = 0) : (currentMusic += 1);
     audio = musicsList[currentMusic].music;
     musicCover.src = musicsList[currentMusic].cover;
     musicName.innerText = musicsList[currentMusic].name;
+    musicTimeRange.value = 0;
+    audio.currentTime = 0;
     audio.play();
     audio.addEventListener("timeupdate", (e) => {
       musicTimeRange.value = e.target.currentTime;
@@ -135,6 +123,10 @@ const changeMusic = () => {
 audio.addEventListener("canplay", (e) => {
   musicTimeRange.max = e.target.duration;
   musicTimeAll.innerText = fmtMSS(Math.floor(audio.duration));
+
+  musicItemListTimes.forEach((element, index) => {
+    element.innerText = fmtMSS(Math.floor(musicsList[index].music.duration));
+  });
 });
 
 audio.addEventListener("timeupdate", (e) => {
@@ -214,26 +206,41 @@ musicVolumeUp.addEventListener("click", (e) => {
 });
 
 // ___________________________________________________________________________
+// music list functionality - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-musicListCoverOne.src = musicsList[0].cover;
-musicListCoverTwo.src = musicsList[1].cover;
-musicListCoverThree.src = musicsList[2].cover;
-musicListCoverFour.src = musicsList[3].cover;
-musicListCoverFive.src = musicsList[4].cover;
+function clickOnEachMusicInList(indexMusic) {
+  currentMusic = indexMusic;
+  if (audio.played) audio.pause();
+  playBtn.classList.replace("bi-pause-fill", "bi-play-fill");
+  changeMusic();
+}
 
-// musicListNameOne.innerText = musicsList[0].name;
-// musicListNameTwo.innerText = musicsList[1].name;
-// musicListNameThree.innerText = musicsList[2].name;
-// musicListNameFour.innerText = musicsList[3].name;
-// musicListNameFive.innerText = musicsList[4].name;
+musicItemListCovers.forEach((element, index) => {
+  element.src = musicsList[index].cover;
+});
 
-musicItemList.forEach((element,index) => {
-  element[index].innerText = musicsList[index].name;
-})
+musicItemListNames.forEach((element, index) => {
+  element.innerText = musicsList[index].name;
+});
 
-
-musicListTimeOne.innerText = musicsList[0].time
-musicListTimeTwo.innerText = musicsList[1].time
-musicListTimeThree.innerText = musicsList[2].time
-musicListTimeFour.innerText = musicsList[3].time
-musicListTimeFive.innerText = musicsList[4].time
+Array.from(allElementMusicList.children).forEach((liElement, index) => {
+  liElement.addEventListener("click", (e) => {
+    switch (index) {
+      case 1:
+        clickOnEachMusicInList(0);
+        break;
+      case 2:
+        clickOnEachMusicInList(1);
+        break;
+      case 3:
+        clickOnEachMusicInList(2);
+        break;
+      case 4:
+        clickOnEachMusicInList(3);
+      case 5:
+        clickOnEachMusicInList(4);
+      break;
+      default : null
+    }
+  });
+});
