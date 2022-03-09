@@ -237,6 +237,7 @@ Array.from(allElementMusicList.children).forEach((liElement, index) => {
         break;
       case 4:
         clickOnEachMusicInList(3);
+        break;
       case 5:
         clickOnEachMusicInList(4);
       break;
