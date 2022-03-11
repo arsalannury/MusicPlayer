@@ -1,3 +1,5 @@
+
+
 @mixin displayes($display, $align, $justify, $direction) {
   display: $display;
   align-items: $align;
@@ -178,6 +180,9 @@ main {
    .active_repeat_icon {
      color: #f77f00;
    }
+   .music_list_icon_show {
+     display: none;
+   }
   }
 }
 
@@ -189,3 +194,4 @@ main {
     box-shadow: 0 0 6px 6px orange;
   }
 }
+@import 'responsive';

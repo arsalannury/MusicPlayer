@@ -1,0 +1,15 @@
+@media screen and (max-width : 576px) {
+    .music_list {
+      display: none;
+    }
+    .music_card {
+        width: 100%;
+        .card {
+            .music_options {
+                .music_list_icon_show {
+                    display: unset;
+                }
+            }
+        }
+    }
+}

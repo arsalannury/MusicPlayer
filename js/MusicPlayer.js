@@ -11,6 +11,8 @@ const musicRepeat = document.querySelector(".music_repeat_icon");
 const musicVolumeUp = document.getElementById("music_volumeup_icon");
 const musicMute = document.getElementById("music_mute_icon");
 const allElementMusicList = document.querySelector(".music_ul_list");
+const musicListIconShow = document.querySelector('.music_list_icon_show')
+const musicListResponsive = document.querySelector('.music_list');
 
 const musicItemListNames = document.querySelectorAll(
   ".music_item_list .music_list_name"
@@ -245,3 +247,8 @@ Array.from(allElementMusicList.children).forEach((liElement, index) => {
     }
   });
 });
+
+
+musicListIconShow.addEventListener('click',(e) => {
+  musicListResponsive.style.display = 'flex'
+})

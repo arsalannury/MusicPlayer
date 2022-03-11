@@ -214,12 +214,28 @@ main {
   color: #f77f00;
 }
 
+.card .music_options .music_list_icon_show {
+  display: none;
+}
+
 @keyframes equalizer {
   from {
     box-shadow: none;
   }
   to {
     box-shadow: 0 0 6px 6px orange;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .music_list {
+    display: none;
+  }
+  .music_card {
+    width: 100%;
+  }
+  .music_card .card .music_options .music_list_icon_show {
+    display: unset;
   }
 }
 /*# sourceMappingURL=MusicPlayer.css.map */

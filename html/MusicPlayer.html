@@ -17,79 +17,86 @@
     <title>Music Player</title>
   </head>
   <body>
-    <main class="container-fluid">
+    <main>
+      <!-- <div class="container-fluid"> -->
       <!-- <div class="row"> -->
      
-      <div class="music_card">
-        <div class="card">
-          <img src="" alt="cover" class="music_img" />
-          <p class="music_name">test name</p>
-          <div class="music_range_wrapper">
-            <input type="range" name="range" id="range" class="music_time" value="0" />
-            <div class="timer_show">
-              <p class="music_time_number">0:00</p>
-              <p class="music_time_all"></p>
+       <!-- <div class="col-lg-6"> -->
+        <div class="music_card">
+          <div class="card">
+            <img src="" alt="cover" class="music_img" />
+            <p class="music_name">test name</p>
+            <div class="music_range_wrapper">
+              <input type="range" name="range" id="range" class="music_time" value="0" />
+              <div class="timer_show">
+                <p class="music_time_number">0:00</p>
+                <p class="music_time_all"></p>
+              </div>
+              <div class="music_options">
+                <i class="bi bi-arrow-repeat music_repeat_icon" id="music_repeat_icon"></i>
+                <i class="bi bi-list music_list_icon_show"></i>
+                <i class="bi bi-volume-up-fill" id="music_volumeup_icon"></i>
+              </div>
             </div>
-            <div class="music_options">
-              <i class="bi bi-arrow-repeat music_repeat_icon" id="music_repeat_icon"></i>
-              <i class="bi bi-volume-up-fill" id="music_volumeup_icon"></i>
+            <div class="music_btns">
+              <i class="bi bi-skip-start-fill" id="prev_btn"></i>
+              <i class="bi bi-play-fill" id="play_btn"></i>
+              <i class="bi bi-skip-end-fill" id="next_btn"></i>
             </div>
-          </div>
-          <div class="music_btns">
-            <i class="bi bi-skip-start-fill" id="prev_btn"></i>
-            <i class="bi bi-play-fill" id="play_btn"></i>
-            <i class="bi bi-skip-end-fill" id="next_btn"></i>
           </div>
         </div>
-      </div>
+       <!-- </div> -->
 
-      <div class="music_list">
-        <ul class="music_ul_list">
-          <li class="music_item_list">
-            <img
-              src="../pictures//playlist.png"
-              alt="playlist"
-              class="music_img_list"
-            />
-            <img
-              src="../pictures/micro.png"
-              alt="title"
-              class="music_img_list"
-            />
-            <img
-              src="../pictures/slider.png"
-              alt="time"
-              class="music_img_list"
-            />
-          </li>
-          <li class="music_item_list" id="music_item1">
-            <img class="music_list_cover" src="" alt="music_cover" loading="lasy">
-            <span class="music_list_name"></span
-            ><span class="music_list_time"></span>
-          </li>
-          <li class="music_item_list" id="music_item2">
-            <img class="music_list_cover" src="" alt="music_cover" loading="lasy">
-            <span class="music_list_name"></span
-            ><span class="music_list_time"></span>
-          </li>
-          <li class="music_item_list" id="music_item3">
-            <img class="music_list_cover" src="" alt="music_cover" loading="lasy">
-            <span class="music_list_name"></span
-            ><span class="music_list_time"></span>
-          </li>
-          <li class="music_item_list" id="music_item4">
-            <img class="music_list_cover" src="" alt="music_cover" loading="lasy">
-            <span class="music_list_name"></span
-            ><span class="music_list_time"></span>
-          </li>
-          <li class="music_item_list" id="music_item5">
-            <img class="music_list_cover" src="" alt="music_cover" loading="lasy">
-            <span class="music_list_name"></span
-            ><span class="music_list_time"></span>
-          </li>
-        </ul>
-      </div>
+      <!-- <div class="col-lg-6"> -->
+        <div class="music_list">
+          <ul class="music_ul_list">
+            <li class="music_item_list">
+              <img
+                src="../pictures//playlist.png"
+                alt="playlist"
+                class="music_img_list"
+              />
+              <img
+                src="../pictures/micro.png"
+                alt="title"
+                class="music_img_list"
+              />
+              <img
+                src="../pictures/slider.png"
+                alt="time"
+                class="music_img_list"
+              />
+            </li>
+            <li class="music_item_list" id="music_item1">
+              <img class="music_list_cover" src="" alt="music_cover" loading="lasy">
+              <span class="music_list_name"></span
+              ><span class="music_list_time"></span>
+            </li>
+            <li class="music_item_list" id="music_item2">
+              <img class="music_list_cover" src="" alt="music_cover" loading="lasy">
+              <span class="music_list_name"></span
+              ><span class="music_list_time"></span>
+            </li>
+            <li class="music_item_list" id="music_item3">
+              <img class="music_list_cover" src="" alt="music_cover" loading="lasy">
+              <span class="music_list_name"></span
+              ><span class="music_list_time"></span>
+            </li>
+            <li class="music_item_list" id="music_item4">
+              <img class="music_list_cover" src="" alt="music_cover" loading="lasy">
+              <span class="music_list_name"></span
+              ><span class="music_list_time"></span>
+            </li>
+            <li class="music_item_list" id="music_item5">
+              <img class="music_list_cover" src="" alt="music_cover" loading="lasy">
+              <span class="music_list_name"></span
+              ><span class="music_list_time"></span>
+            </li>
+          </ul>
+        </div>
+      <!-- </div> -->
     <!-- </div> -->
+  <!-- </div> -->
     </main>
     <script src="../js/MusicPlayer.js"></script>
   </body>
