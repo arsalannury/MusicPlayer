@@ -13,6 +13,7 @@ const musicMute = document.getElementById("music_mute_icon");
 const allElementMusicList = document.querySelector(".music_ul_list");
 const musicListIconShow = document.querySelector('.music_list_icon_show')
 const musicListResponsive = document.querySelector('.music_list');
+const closeBackdrop = document.querySelector('#close_backdrop');
 
 const musicItemListNames = document.querySelectorAll(
   ".music_item_list .music_list_name"
@@ -250,5 +251,13 @@ Array.from(allElementMusicList.children).forEach((liElement, index) => {
 
 
 musicListIconShow.addEventListener('click',(e) => {
-  musicListResponsive.style.display = 'flex'
+  closeBackdrop.style.display = 'unset';
+  musicListResponsive.style.transform = 'translateX(0)';
+  document.querySelector('.backdrop').style.display = 'unset';
+})
+
+closeBackdrop.addEventListener('click',() => {
+  closeBackdrop.style.display = 'none';
+  musicListResponsive.style.transform = 'translateX(-1000px)';
+  document.querySelector('.backdrop').style.display = 'none';
 })

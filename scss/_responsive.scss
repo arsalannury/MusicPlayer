@@ -1,15 +1,26 @@
-@media screen and (max-width : 576px) {
-    .music_list {
-      display: none;
+@media screen and (max-width: 576px) {
+  main {
+    position: relative;
+  }
+  .music_list {
+    //   display: none;
+    transform: translateX(-1000px);
+    transition: all 0.5s ease;
+    z-index: 1056;
+    position: absolute;
+    width: 100%;
+    .music_ul_list {
+      width: 100%;
     }
-    .music_card {
-        width: 100%;
-        .card {
-            .music_options {
-                .music_list_icon_show {
-                    display: unset;
-                }
-            }
+  }
+  .music_card {
+    width: 100%;
+    .card {
+      .music_options {
+        .music_list_icon_show {
+          display: unset;
         }
+      }
     }
+  }
 }
