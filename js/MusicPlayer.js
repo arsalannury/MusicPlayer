@@ -11,9 +11,10 @@ const musicRepeat = document.querySelector(".music_repeat_icon");
 const musicVolumeUp = document.getElementById("music_volumeup_icon");
 const musicMute = document.getElementById("music_mute_icon");
 const allElementMusicList = document.querySelector(".music_ul_list");
-const musicListIconShow = document.querySelector('.music_list_icon_show')
-const musicListResponsive = document.querySelector('.music_list');
-const closeBackdrop = document.querySelector('#close_backdrop');
+const musicListIconShow = document.querySelector(".music_list_icon_show");
+const musicListResponsive = document.querySelector(".music_list");
+const closeBackdrop = document.querySelector("#close_backdrop");
+const downloadBtn = document.querySelector('.download_btn');
 
 const musicItemListNames = document.querySelectorAll(
   ".music_item_list .music_list_name"
@@ -29,26 +30,35 @@ const musicsList = [
   {
     music: new Audio("../musics/Shayea-Asabani.mp3"),
     name: "Shayea - Asabani",
+    download:
+      "https://dl.musicguitar.ir/Music/Shayea/128/Shayea%20-%20Asabani%20%5B128%5D.mp3",
     cover: "../pictures/asabani.jpg",
   },
   {
     music: new Audio("../musics/Shayea-YeMoghehaei2.mp3"),
     name: "Shayea-Ye Moghehaei 2",
+    download:
+      "https://dl.musicguitar.ir/Music/Shayea/320/Shayea%20-%20Ye%20Moghehaei%202%20%28FT.%20Mahyar%29%20%5B320%5D.mp3",
     cover: "../pictures/yemoghe.jpg",
   },
   {
     music: new Audio("../musics/Shayea-Daram.mp3"),
     name: "Shayea-Daram",
+    download:
+      "https://dl.sakhamusic.ir/97/shahrivar/01/Shayea-Daram-(Ft-Sajadii).mp3",
     cover: "../pictures/daram.jpg",
   },
   {
     music: new Audio("../musics/Shayea-Sabr.mp3"),
     name: "Shayea-Sabr",
+    download: "https://dl.melovy.ir/2021/02/Shayea-Sabr1.mp3",
     cover: "../pictures/Sabr.jpg",
   },
   {
     music: new Audio("../musics/Shayea-Sabr2.mp3"),
     name: "Shayea-Sabr 2",
+    download:
+      "https://dl.my-ahangha.ir/up/2018/Shayea%20-%20Sabr%202.mp3",
     cover: "../pictures/sabr2.jpg",
   },
 ];
@@ -64,6 +74,7 @@ function fmtMSS(s) {
 let audio = musicsList[currentMusic].music;
 musicCover.src = musicsList[currentMusic].cover;
 musicName.innerText = musicsList[currentMusic].name;
+downloadBtn.href = musicsList[currentMusic].download;
 
 //  this function change everytime which click on repeat mode
 let repeatAfterEnd = () => {
@@ -79,13 +90,14 @@ const isMusicEnd = () => {
 };
 
 // if repeat was un active music change
-function repeatIconUnActive () {
+function repeatIconUnActive() {
   if (audio.currentTime === audio.duration) {
     playBtn.classList.replace("bi-play-fill", "bi-pause-fill");
     currentMusic >= 4 ? (currentMusic = 0) : (currentMusic += 1);
     audio = musicsList[currentMusic].music;
     musicCover.src = musicsList[currentMusic].cover;
     musicName.innerText = musicsList[currentMusic].name;
+    downloadBtn.href = musicsList[currentMusic].download;
     musicTimeRange.value = 0;
     audio.currentTime = 0;
     audio.play();
@@ -99,13 +111,14 @@ function repeatIconUnActive () {
       repeatAfterEnd();
     });
   }
-};
+}
 
 // handler next and prev btn
 const changeMusic = () => {
   audio = musicsList[currentMusic].music;
   musicCover.src = musicsList[currentMusic].cover;
   musicName.innerText = musicsList[currentMusic].name;
+  downloadBtn.href = musicsList[currentMusic].download;
   musicCover.style.animationPlayState = "paused";
   musicCover.style.animationName = "none";
   musicTimeRange.value = 0;
@@ -209,13 +222,14 @@ musicVolumeUp.addEventListener("click", (e) => {
 });
 
 // ___________________________________________________________________________
-// music list functionality - - - - - - - - - - - - - - - - - - - - - - - - - 
+// music list functionality - - - - - - - - - - - - - - - - - - - - - - - - -
 
 function clickOnEachMusicInList(indexMusic) {
   currentMusic = indexMusic;
   if (audio.played) audio.pause();
   playBtn.classList.replace("bi-pause-fill", "bi-play-fill");
   changeMusic();
+  handleCloseMusicList();
 }
 
 musicItemListCovers.forEach((element, index) => {
@@ -243,21 +257,25 @@ Array.from(allElementMusicList.children).forEach((liElement, index) => {
         break;
       case 5:
         clickOnEachMusicInList(4);
-      break;
-      default : null
+        break;
+      default:
+        null;
     }
   });
 });
 
+musicListIconShow.addEventListener("click", (e) => {
+  closeBackdrop.style.display = "unset";
+  musicListResponsive.style.transform = "translateX(0)";
+  document.querySelector(".backdrop").style.display = "unset";
+});
 
-musicListIconShow.addEventListener('click',(e) => {
-  closeBackdrop.style.display = 'unset';
-  musicListResponsive.style.transform = 'translateX(0)';
-  document.querySelector('.backdrop').style.display = 'unset';
-})
+closeBackdrop.addEventListener("click", () => {
+  handleCloseMusicList();
+});
 
-closeBackdrop.addEventListener('click',() => {
-  closeBackdrop.style.display = 'none';
-  musicListResponsive.style.transform = 'translateX(-1000px)';
-  document.querySelector('.backdrop').style.display = 'none';
-})
+function handleCloseMusicList() {
+  closeBackdrop.style.display = "none";
+  musicListResponsive.style.transform = "translateX(-1000px)";
+  document.querySelector(".backdrop").style.display = "none";
+}
