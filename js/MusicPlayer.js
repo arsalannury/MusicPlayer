@@ -141,7 +141,9 @@ audio.addEventListener("canplay", (e) => {
   musicTimeAll.innerText = fmtMSS(Math.floor(audio.duration));
 
   musicItemListTimes.forEach((element, index) => {
-    element.innerText = fmtMSS(Math.floor(musicsList[index].music.duration));
+    setTimeout(()=>{
+      element.innerText = fmtMSS(Math.floor(musicsList[index].music.duration));
+    },1000)
   });
 });
 
