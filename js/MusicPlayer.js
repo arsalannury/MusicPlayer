@@ -276,6 +276,7 @@ closeBackdrop.addEventListener("click", () => {
 
 function handleCloseMusicList() {
   closeBackdrop.style.display = "none";
+  if(innerWidth >= 1000) return;
   musicListResponsive.style.transform = "translateX(-1000px)";
   document.querySelector(".backdrop").style.display = "none";
 }
